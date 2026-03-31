@@ -2,9 +2,9 @@ import json
 
 import pytest
 
-from brains.llm.provider import LLMProvider, LLMResponse
-from brains.llm.fake_provider import FakeLLMProvider
 from brains.llm import create_provider
+from brains.llm.fake_provider import FakeLLMProvider
+from brains.llm.provider import LLMProvider, LLMResponse
 
 
 class TestFakeLLMProvider:

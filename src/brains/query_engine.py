@@ -11,24 +11,33 @@ from brains.sources.base import DataSource
 logger = logging.getLogger(__name__)
 
 
-INTERPRETATION_SYSTEM_PROMPT = """You are a query planner for a data service. Given a user query, decide which data sources to consult and what queries to run.
+INTERPRETATION_SYSTEM_PROMPT = (
+    "You are a query planner for a data service. "
+    "Given a user query, decide which data sources to consult "
+    "and what queries to run.\n\n"
+    "Available data sources:\n"
+    "{source_descriptions}\n\n"
+    "Return a JSON object with a \"queries\" array. "
+    "Each query object must have:\n"
+    "- \"source\": the data source name (one of: {source_names})\n"
+    "- \"query\": the specific query to run "
+    "(SQL for sql source, natural text for vector source, "
+    "JSON operation for graph source)\n"
+    "- \"reasoning\": why this source and query are appropriate\n\n"
+    "Route queries to the most relevant sources. "
+    "Use multiple sources when the question benefits "
+    "from cross-referencing."
+)
 
-Available data sources:
-{source_descriptions}
 
-Return a JSON object with a "queries" array. Each query object must have:
-- "source": the data source name (one of: {source_names})
-- "query": the specific query to run (SQL for sql source, natural text for vector source, JSON operation for graph source)
-- "reasoning": why this source and query are appropriate
-
-Route queries to the most relevant sources. Use multiple sources when the question benefits from cross-referencing."""
-
-
-SYNTHESIS_SYSTEM_PROMPT = """You are a data synthesis assistant. Synthesize the following query results into a clear, accurate response. Include source attribution.
-
-Return a JSON object with:
-- "answer": a clear text answer synthesizing all results
-- "confidence": overall confidence score between 0 and 1"""
+SYNTHESIS_SYSTEM_PROMPT = (
+    "You are a data synthesis assistant. "
+    "Synthesize the following query results into a clear, "
+    "accurate response. Include source attribution.\n\n"
+    "Return a JSON object with:\n"
+    "- \"answer\": a clear text answer synthesizing all results\n"
+    "- \"confidence\": overall confidence score between 0 and 1"
+)
 
 
 class QueryEngine:
@@ -126,7 +135,10 @@ class QueryEngine:
             return plan.get("queries", []), response.model
         except (json.JSONDecodeError, AttributeError):
             logger.error("Failed to parse query plan from LLM response")
-            return [{"source": "sql", "query": request.query, "reasoning": "fallback"}], response.model
+            fallback = [
+                {"source": "sql", "query": request.query, "reasoning": "fallback"}
+            ]
+            return fallback, response.model
 
     def _build_query_params(self, source_name: str, query: str | dict) -> dict[str, Any]:
         if source_name == "sql":

@@ -143,7 +143,13 @@ class GraphSource:
     def describe(self) -> DataSourceSchema:
         return DataSourceSchema(
             name="graph",
-            description=f"Knowledge graph of technology relationships with {self._graph.number_of_nodes()} nodes and {self._graph.number_of_edges()} edges. Supports neighbor lookup, path finding, and subgraph extraction.",
+            description=(
+                f"Knowledge graph of technology relationships with "
+                f"{self._graph.number_of_nodes()} nodes and "
+                f"{self._graph.number_of_edges()} edges. "
+                f"Supports neighbor lookup, path finding, "
+                f"and subgraph extraction."
+            ),
             capabilities=["Neighbor lookup", "Shortest path", "Subgraph extraction"],
             sample_queries=[
                 '{"operation": "neighbors", "node": "Python"}',

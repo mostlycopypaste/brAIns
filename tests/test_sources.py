@@ -1,9 +1,9 @@
 import pytest
 
 from brains.sources.base import DataSource
+from brains.sources.graph_source import GraphSource
 from brains.sources.sql_source import SQLiteSource
 from brains.sources.vector_source import VectorSource
-from brains.sources.graph_source import GraphSource
 
 
 class TestSQLiteSource:

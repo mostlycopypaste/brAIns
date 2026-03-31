@@ -74,7 +74,11 @@ class SQLiteSource:
     def describe(self) -> DataSourceSchema:
         return DataSourceSchema(
             name="sql",
-            description="SQLite relational database with tech companies data. Table: companies (name, sector, founded, headquarters, employees, description).",
+            description=(
+                "SQLite relational database with tech companies data. "
+                "Table: companies (name, sector, founded, headquarters, "
+                "employees, description)."
+            ),
             capabilities=["SQL SELECT queries", "Filtering", "Aggregation", "Sorting"],
             sample_queries=[
                 "SELECT * FROM companies WHERE sector = 'AI'",

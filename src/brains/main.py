@@ -61,7 +61,10 @@ async def lifespan(app: FastAPI):
 def create_app() -> FastAPI:
     app = FastAPI(
         title="brAIns",
-        description="AI-augmented curated data service. Query specialized, curated data sources through an LLM-powered interface.",
+        description=(
+            "AI-augmented curated data service. "
+            "Query specialized, curated data sources through an LLM-powered interface."
+        ),
         version="0.1.0",
         lifespan=lifespan,
     )

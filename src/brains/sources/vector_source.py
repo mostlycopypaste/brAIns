@@ -84,7 +84,11 @@ class VectorSource:
     def describe(self) -> DataSourceSchema:
         return DataSourceSchema(
             name="vector",
-            description="In-memory vector store with AI/ML knowledge chunks. Supports semantic similarity search over pre-embedded text passages.",
+            description=(
+                "In-memory vector store with AI/ML knowledge chunks. "
+                "Supports semantic similarity search over "
+                "pre-embedded text passages."
+            ),
             capabilities=[
                 "Semantic similarity search",
                 "Top-K retrieval",
