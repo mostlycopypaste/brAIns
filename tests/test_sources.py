@@ -3,6 +3,7 @@ import pytest
 from brains.sources.base import DataSource
 from brains.sources.sql_source import SQLiteSource
 from brains.sources.vector_source import VectorSource
+from brains.sources.graph_source import GraphSource
 
 
 class TestSQLiteSource:
@@ -73,4 +74,38 @@ class TestVectorSource:
 
     def test_query_empty_text_returns_empty(self, source):
         results = source.query({"text": "", "top_k": 3})
+        assert results == []
+
+
+class TestGraphSource:
+    @pytest.fixture
+    def source(self):
+        return GraphSource()
+
+    def test_implements_protocol(self, source):
+        assert isinstance(source, DataSource)
+
+    def test_describe_returns_schema(self, source):
+        schema = source.describe()
+        assert schema.name == "graph"
+        assert len(schema.capabilities) > 0
+
+    def test_query_neighbors(self, source):
+        results = source.query({"operation": "neighbors", "node": "Python"})
+        assert len(results) > 0
+        for r in results:
+            assert r.source == "graph"
+            assert "neighbor" in r.data
+
+    def test_query_path(self, source):
+        results = source.query({"operation": "path", "from": "Python", "to": "OpenAI"})
+        assert len(results) > 0
+        for r in results:
+            assert r.source == "graph"
+            assert "path" in r.data
+            assert "length" in r.data
+            assert r.data["length"] >= 1
+
+    def test_query_unknown_node_returns_empty(self, source):
+        results = source.query({"operation": "neighbors", "node": "NonexistentThing"})
         assert results == []
