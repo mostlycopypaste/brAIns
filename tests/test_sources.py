@@ -2,6 +2,7 @@ import pytest
 
 from brains.sources.base import DataSource
 from brains.sources.sql_source import SQLiteSource
+from brains.sources.vector_source import VectorSource
 
 
 class TestSQLiteSource:
@@ -44,3 +45,32 @@ class TestSQLiteSource:
         results = source.query({"sql": "SELECT COUNT(*) as cnt FROM companies"})
         assert len(results) > 0
         assert results[0].data["cnt"] > 0
+
+
+class TestVectorSource:
+    @pytest.fixture
+    def source(self):
+        return VectorSource()
+
+    def test_implements_protocol(self, source):
+        assert isinstance(source, DataSource)
+
+    def test_describe_returns_schema(self, source):
+        schema = source.describe()
+        assert schema.name == "vector"
+        assert len(schema.capabilities) > 0
+
+    def test_query_returns_ranked_results(self, source):
+        results = source.query({"text": "neural networks and deep learning", "top_k": 3})
+        assert len(results) > 0
+        assert len(results) <= 3
+        for r in results:
+            assert r.source == "vector"
+            assert 0.0 <= r.score <= 1.0
+            assert "text" in r.data
+        scores = [r.score for r in results]
+        assert scores == sorted(scores, reverse=True)
+
+    def test_query_empty_text_returns_empty(self, source):
+        results = source.query({"text": "", "top_k": 3})
+        assert results == []

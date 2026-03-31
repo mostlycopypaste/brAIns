@@ -1,0 +1,92 @@
+[
+    {
+        "id": "chunk_01",
+        "text": "Transformer architecture uses self-attention mechanisms to process sequences in parallel rather than sequentially. This enables much faster training on modern hardware compared to recurrent neural networks.",
+        "category": "architecture",
+        "embedding": [0.8, 0.7, 0.1, 0.05, 0.3, 0.2, 0.6, 0.5, 0.1, 0.05, 0.4, 0.3, 0.7, 0.6, 0.2, 0.1, 0.8, 0.7, 0.3, 0.2, 0.5, 0.4, 0.1, 0.05, 0.6, 0.5, 0.2, 0.1, 0.7, 0.6, 0.3, 0.2, 0.8, 0.7, 0.1, 0.05, 0.4, 0.3, 0.6, 0.5, 0.2, 0.1, 0.5, 0.4, 0.3, 0.2, 0.7, 0.6, 0.1, 0.05, 0.8, 0.7, 0.4, 0.3, 0.6, 0.5, 0.2, 0.1, 0.5, 0.4, 0.3, 0.2, 0.7, 0.6]
+    },
+    {
+        "id": "chunk_02",
+        "text": "The attention mechanism allows a model to focus on different parts of the input sequence when producing each element of the output. Multi-head attention enables attending to information from different representation subspaces.",
+        "category": "architecture",
+        "embedding": [0.75, 0.65, 0.15, 0.1, 0.35, 0.25, 0.55, 0.45, 0.15, 0.1, 0.45, 0.35, 0.65, 0.55, 0.25, 0.15, 0.75, 0.65, 0.35, 0.25, 0.55, 0.45, 0.15, 0.1, 0.55, 0.45, 0.25, 0.15, 0.65, 0.55, 0.35, 0.25, 0.75, 0.65, 0.15, 0.1, 0.45, 0.35, 0.55, 0.45, 0.25, 0.15, 0.55, 0.45, 0.35, 0.25, 0.65, 0.55, 0.15, 0.1, 0.75, 0.65, 0.45, 0.35, 0.55, 0.45, 0.25, 0.15, 0.55, 0.45, 0.35, 0.25, 0.65, 0.55]
+    },
+    {
+        "id": "chunk_03",
+        "text": "Gradient descent is an optimization algorithm that iteratively adjusts model parameters to minimize a loss function. Variants like Adam and SGD with momentum are widely used in deep learning training.",
+        "category": "training",
+        "embedding": [0.2, 0.3, 0.8, 0.7, 0.1, 0.05, 0.4, 0.3, 0.7, 0.6, 0.2, 0.1, 0.3, 0.2, 0.6, 0.5, 0.1, 0.05, 0.8, 0.7, 0.3, 0.2, 0.4, 0.3, 0.6, 0.5, 0.1, 0.05, 0.2, 0.1, 0.7, 0.6, 0.3, 0.2, 0.8, 0.7, 0.1, 0.05, 0.4, 0.3, 0.6, 0.5, 0.2, 0.1, 0.5, 0.4, 0.3, 0.2, 0.1, 0.05, 0.7, 0.6, 0.8, 0.7, 0.4, 0.3, 0.2, 0.1, 0.6, 0.5, 0.3, 0.2, 0.5, 0.4]
+    },
+    {
+        "id": "chunk_04",
+        "text": "Reinforcement learning trains agents to make sequential decisions by maximizing cumulative reward. Key algorithms include Q-learning, policy gradient methods, and proximal policy optimization (PPO).",
+        "category": "learning",
+        "embedding": [0.1, 0.2, 0.3, 0.8, 0.7, 0.6, 0.2, 0.1, 0.4, 0.3, 0.8, 0.7, 0.1, 0.05, 0.3, 0.2, 0.6, 0.5, 0.4, 0.3, 0.7, 0.6, 0.2, 0.1, 0.8, 0.7, 0.1, 0.05, 0.3, 0.2, 0.6, 0.5, 0.1, 0.05, 0.4, 0.3, 0.7, 0.6, 0.2, 0.1, 0.5, 0.4, 0.8, 0.7, 0.3, 0.2, 0.6, 0.5, 0.1, 0.05, 0.4, 0.3, 0.2, 0.1, 0.7, 0.6, 0.8, 0.7, 0.5, 0.4, 0.3, 0.2, 0.6, 0.5]
+    },
+    {
+        "id": "chunk_05",
+        "text": "Neural networks are computing systems inspired by biological neural networks. They consist of layers of interconnected nodes that learn to transform inputs into outputs through training on examples.",
+        "category": "fundamentals",
+        "embedding": [0.6, 0.5, 0.3, 0.2, 0.4, 0.3, 0.7, 0.6, 0.2, 0.1, 0.5, 0.4, 0.8, 0.7, 0.3, 0.2, 0.6, 0.5, 0.4, 0.3, 0.7, 0.6, 0.1, 0.05, 0.5, 0.4, 0.3, 0.2, 0.8, 0.7, 0.2, 0.1, 0.6, 0.5, 0.4, 0.3, 0.7, 0.6, 0.3, 0.2, 0.5, 0.4, 0.1, 0.05, 0.8, 0.7, 0.6, 0.5, 0.2, 0.1, 0.4, 0.3, 0.7, 0.6, 0.3, 0.2, 0.5, 0.4, 0.1, 0.05, 0.6, 0.5, 0.8, 0.7]
+    },
+    {
+        "id": "chunk_06",
+        "text": "Word embeddings represent words as dense vectors in a continuous vector space where semantically similar words are mapped to nearby points. Word2Vec and GloVe are foundational embedding techniques.",
+        "category": "embeddings",
+        "embedding": [0.4, 0.3, 0.6, 0.5, 0.2, 0.1, 0.8, 0.7, 0.3, 0.2, 0.5, 0.4, 0.1, 0.05, 0.7, 0.6, 0.4, 0.3, 0.6, 0.5, 0.8, 0.7, 0.2, 0.1, 0.3, 0.2, 0.5, 0.4, 0.7, 0.6, 0.1, 0.05, 0.4, 0.3, 0.6, 0.5, 0.8, 0.7, 0.2, 0.1, 0.3, 0.2, 0.5, 0.4, 0.7, 0.6, 0.1, 0.05, 0.4, 0.3, 0.6, 0.5, 0.2, 0.1, 0.8, 0.7, 0.3, 0.2, 0.5, 0.4, 0.7, 0.6, 0.1, 0.05]
+    },
+    {
+        "id": "chunk_07",
+        "text": "Tokenization breaks text into smaller units called tokens for processing by language models. Subword tokenization methods like BPE and SentencePiece balance vocabulary size with coverage of rare words.",
+        "category": "nlp",
+        "embedding": [0.3, 0.2, 0.5, 0.4, 0.7, 0.6, 0.1, 0.05, 0.8, 0.7, 0.4, 0.3, 0.6, 0.5, 0.2, 0.1, 0.3, 0.2, 0.7, 0.6, 0.5, 0.4, 0.8, 0.7, 0.1, 0.05, 0.4, 0.3, 0.6, 0.5, 0.2, 0.1, 0.3, 0.2, 0.7, 0.6, 0.5, 0.4, 0.8, 0.7, 0.1, 0.05, 0.4, 0.3, 0.6, 0.5, 0.2, 0.1, 0.3, 0.2, 0.7, 0.6, 0.5, 0.4, 0.1, 0.05, 0.8, 0.7, 0.4, 0.3, 0.6, 0.5, 0.2, 0.1]
+    },
+    {
+        "id": "chunk_08",
+        "text": "Fine-tuning adapts a pre-trained model to a specific task or domain by continuing training on task-specific data. This transfer learning approach requires far less data than training from scratch.",
+        "category": "training",
+        "embedding": [0.25, 0.35, 0.75, 0.65, 0.15, 0.1, 0.45, 0.35, 0.65, 0.55, 0.25, 0.15, 0.35, 0.25, 0.55, 0.45, 0.15, 0.1, 0.75, 0.65, 0.35, 0.25, 0.45, 0.35, 0.55, 0.45, 0.15, 0.1, 0.25, 0.15, 0.65, 0.55, 0.35, 0.25, 0.75, 0.65, 0.15, 0.1, 0.45, 0.35, 0.55, 0.45, 0.25, 0.15, 0.55, 0.45, 0.35, 0.25, 0.15, 0.1, 0.65, 0.55, 0.75, 0.65, 0.45, 0.35, 0.25, 0.15, 0.55, 0.45, 0.35, 0.25, 0.55, 0.45]
+    },
+    {
+        "id": "chunk_09",
+        "text": "Prompt engineering is the practice of crafting effective prompts to guide large language models toward desired outputs. Techniques include few-shot examples, chain-of-thought reasoning, and system prompts.",
+        "category": "techniques",
+        "embedding": [0.5, 0.4, 0.2, 0.1, 0.6, 0.5, 0.3, 0.2, 0.7, 0.6, 0.1, 0.05, 0.4, 0.3, 0.8, 0.7, 0.5, 0.4, 0.2, 0.1, 0.6, 0.5, 0.3, 0.2, 0.7, 0.6, 0.4, 0.3, 0.1, 0.05, 0.8, 0.7, 0.5, 0.4, 0.2, 0.1, 0.6, 0.5, 0.3, 0.2, 0.7, 0.6, 0.4, 0.3, 0.1, 0.05, 0.8, 0.7, 0.5, 0.4, 0.2, 0.1, 0.6, 0.5, 0.3, 0.2, 0.7, 0.6, 0.4, 0.3, 0.1, 0.05, 0.8, 0.7]
+    },
+    {
+        "id": "chunk_10",
+        "text": "Retrieval-Augmented Generation (RAG) combines a retrieval system with a generative model. The retriever finds relevant documents from a knowledge base, which are then used as context for the generator to produce accurate, grounded responses.",
+        "category": "techniques",
+        "embedding": [0.45, 0.35, 0.25, 0.15, 0.55, 0.45, 0.35, 0.25, 0.65, 0.55, 0.15, 0.1, 0.45, 0.35, 0.75, 0.65, 0.45, 0.35, 0.25, 0.15, 0.55, 0.45, 0.35, 0.25, 0.65, 0.55, 0.45, 0.35, 0.15, 0.1, 0.75, 0.65, 0.45, 0.35, 0.25, 0.15, 0.55, 0.45, 0.35, 0.25, 0.65, 0.55, 0.45, 0.35, 0.15, 0.1, 0.75, 0.65, 0.45, 0.35, 0.25, 0.15, 0.55, 0.45, 0.35, 0.25, 0.65, 0.55, 0.45, 0.35, 0.15, 0.1, 0.75, 0.65]
+    },
+    {
+        "id": "chunk_11",
+        "text": "Vector databases are specialized storage systems optimized for similarity search over high-dimensional embedding vectors. They enable efficient nearest-neighbor retrieval for applications like semantic search and recommendation systems.",
+        "category": "infrastructure",
+        "embedding": [0.35, 0.25, 0.55, 0.45, 0.15, 0.1, 0.75, 0.65, 0.25, 0.15, 0.45, 0.35, 0.15, 0.1, 0.65, 0.55, 0.35, 0.25, 0.55, 0.45, 0.75, 0.65, 0.15, 0.1, 0.25, 0.15, 0.45, 0.35, 0.65, 0.55, 0.15, 0.1, 0.35, 0.25, 0.55, 0.45, 0.75, 0.65, 0.15, 0.1, 0.25, 0.15, 0.45, 0.35, 0.65, 0.55, 0.15, 0.1, 0.35, 0.25, 0.55, 0.45, 0.15, 0.1, 0.75, 0.65, 0.25, 0.15, 0.45, 0.35, 0.65, 0.55, 0.15, 0.1]
+    },
+    {
+        "id": "chunk_12",
+        "text": "Knowledge graphs represent information as networks of entities and relationships. They enable structured reasoning about connections between concepts, supporting tasks like question answering and recommendation.",
+        "category": "infrastructure",
+        "embedding": [0.3, 0.2, 0.4, 0.3, 0.6, 0.5, 0.2, 0.1, 0.5, 0.4, 0.7, 0.6, 0.3, 0.2, 0.8, 0.7, 0.4, 0.3, 0.1, 0.05, 0.6, 0.5, 0.7, 0.6, 0.2, 0.1, 0.5, 0.4, 0.3, 0.2, 0.8, 0.7, 0.4, 0.3, 0.1, 0.05, 0.6, 0.5, 0.7, 0.6, 0.2, 0.1, 0.5, 0.4, 0.3, 0.2, 0.8, 0.7, 0.4, 0.3, 0.1, 0.05, 0.6, 0.5, 0.7, 0.6, 0.2, 0.1, 0.5, 0.4, 0.3, 0.2, 0.8, 0.7]
+    },
+    {
+        "id": "chunk_13",
+        "text": "Convolutional neural networks (CNNs) use convolutional layers to automatically learn spatial hierarchies of features from images. They are the backbone of modern computer vision systems.",
+        "category": "architecture",
+        "embedding": [0.7, 0.6, 0.2, 0.1, 0.4, 0.3, 0.5, 0.4, 0.2, 0.1, 0.6, 0.5, 0.7, 0.6, 0.3, 0.2, 0.7, 0.6, 0.4, 0.3, 0.5, 0.4, 0.2, 0.1, 0.6, 0.5, 0.3, 0.2, 0.7, 0.6, 0.4, 0.3, 0.7, 0.6, 0.2, 0.1, 0.5, 0.4, 0.5, 0.4, 0.3, 0.2, 0.6, 0.5, 0.4, 0.3, 0.7, 0.6, 0.2, 0.1, 0.7, 0.6, 0.5, 0.4, 0.5, 0.4, 0.3, 0.2, 0.6, 0.5, 0.4, 0.3, 0.7, 0.6]
+    },
+    {
+        "id": "chunk_14",
+        "text": "Large language models (LLMs) are neural networks trained on vast text corpora that can generate, understand, and reason about natural language. GPT, Claude, and LLaMA are prominent examples.",
+        "category": "fundamentals",
+        "embedding": [0.55, 0.45, 0.35, 0.25, 0.45, 0.35, 0.65, 0.55, 0.25, 0.15, 0.55, 0.45, 0.75, 0.65, 0.35, 0.25, 0.55, 0.45, 0.45, 0.35, 0.65, 0.55, 0.15, 0.1, 0.55, 0.45, 0.35, 0.25, 0.75, 0.65, 0.25, 0.15, 0.55, 0.45, 0.45, 0.35, 0.65, 0.55, 0.35, 0.25, 0.55, 0.45, 0.15, 0.1, 0.75, 0.65, 0.65, 0.55, 0.25, 0.15, 0.45, 0.35, 0.65, 0.55, 0.35, 0.25, 0.55, 0.45, 0.15, 0.1, 0.65, 0.55, 0.75, 0.65]
+    },
+    {
+        "id": "chunk_15",
+        "text": "Deep learning is a subset of machine learning that uses neural networks with many layers to learn complex patterns in data. It has achieved breakthroughs in computer vision, natural language processing, and speech recognition.",
+        "category": "fundamentals",
+        "embedding": [0.65, 0.55, 0.25, 0.15, 0.35, 0.25, 0.75, 0.65, 0.15, 0.1, 0.45, 0.35, 0.85, 0.75, 0.25, 0.15, 0.65, 0.55, 0.35, 0.25, 0.75, 0.65, 0.05, 0.1, 0.45, 0.35, 0.25, 0.15, 0.85, 0.75, 0.15, 0.1, 0.65, 0.55, 0.35, 0.25, 0.75, 0.65, 0.25, 0.15, 0.45, 0.35, 0.05, 0.1, 0.85, 0.75, 0.55, 0.45, 0.15, 0.1, 0.35, 0.25, 0.75, 0.65, 0.25, 0.15, 0.45, 0.35, 0.05, 0.1, 0.55, 0.45, 0.85, 0.75]
+    }
+]
