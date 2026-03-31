@@ -39,6 +39,9 @@ class TestQueryEngine:
         response = engine.execute(request)
         for result in response.results:
             assert result.source == "sql"
+        assert "sql" in response.sources_consulted
+        assert "vector" not in response.sources_consulted
+        assert "graph" not in response.sources_consulted
 
     def test_query_with_raw_format_skips_synthesis(self, engine):
         request = QueryRequest(

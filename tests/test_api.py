@@ -45,6 +45,9 @@ class TestQueryEndpoint:
         data = response.json()
         for result in data["results"]:
             assert result["source"] == "sql"
+        assert "sql" in data["sources_consulted"]
+        assert "vector" not in data["sources_consulted"]
+        assert "graph" not in data["sources_consulted"]
 
     def test_query_with_raw_format(self, client):
         response = client.post(

@@ -10,6 +10,7 @@ from brains.llm import create_provider
 from brains.models import (
     DataSourceInfo,
     HealthResponse,
+    QueryMetadata,
     QueryRequest,
     QueryResponse,
     SourcesResponse,
@@ -97,6 +98,16 @@ def create_app() -> FastAPI:
 
     @app.post("/query", response_model=QueryResponse)
     async def query(request: QueryRequest):
+        if _engine is None:
+            return QueryResponse(
+                sources_consulted=[],
+                results=[],
+                metadata=QueryMetadata(
+                    total_results=0,
+                    context_tokens_used=0,
+                    interpretation_model="unknown",
+                ),
+            )
         return _engine.execute(request)
 
     return app
