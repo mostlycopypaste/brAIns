@@ -35,8 +35,8 @@ SYNTHESIS_SYSTEM_PROMPT_STRUCTURED = (
     "Synthesize the following query results into a structured response. "
     "Include source attribution.\n\n"
     "Return a JSON object with:\n"
-    "- \"answer\": a JSON object organizing the synthesized data "
-    "with clear keys, arrays, and nested structure as appropriate\n"
+    "- \"answer\": a JSON-formatted string organizing the synthesized data "
+    "with clear keys and structure (the value must be a string, not a nested object)\n"
     "- \"confidence\": overall confidence score between 0 and 1"
 )
 
