@@ -52,7 +52,7 @@ async def lifespan(app: FastAPI):
         "brAIns started: provider=%s, model=%s, sources=%d",
         _settings.llm_provider,
         _settings.llm_model,
-        len(_engine._sources),
+        len(_engine.sources),
     )
     yield
     _engine = None
@@ -74,7 +74,7 @@ def create_app() -> FastAPI:
     async def health():
         return HealthResponse(
             status="ok",
-            sources_loaded=len(_engine._sources) if _engine else 0,
+            sources_loaded=len(_engine.sources) if _engine else 0,
             llm_provider=_settings.llm_provider if _settings else "unknown",
         )
 
@@ -84,7 +84,7 @@ def create_app() -> FastAPI:
             return SourcesResponse(sources=[])
 
         source_infos = []
-        for source in _engine._sources.values():
+        for source in _engine.sources.values():
             schema = source.describe()
             source_infos.append(
                 DataSourceInfo(

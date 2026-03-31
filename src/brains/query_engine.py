@@ -30,12 +30,23 @@ INTERPRETATION_SYSTEM_PROMPT = (
 )
 
 
-SYNTHESIS_SYSTEM_PROMPT = (
+SYNTHESIS_SYSTEM_PROMPT_STRUCTURED = (
+    "You are a data synthesis assistant. "
+    "Synthesize the following query results into a structured response. "
+    "Include source attribution.\n\n"
+    "Return a JSON object with:\n"
+    "- \"answer\": a JSON object organizing the synthesized data "
+    "with clear keys, arrays, and nested structure as appropriate\n"
+    "- \"confidence\": overall confidence score between 0 and 1"
+)
+
+SYNTHESIS_SYSTEM_PROMPT_NARRATIVE = (
     "You are a data synthesis assistant. "
     "Synthesize the following query results into a clear, "
-    "accurate response. Include source attribution.\n\n"
+    "natural language narrative. Include source attribution.\n\n"
     "Return a JSON object with:\n"
-    "- \"answer\": a clear text answer synthesizing all results\n"
+    "- \"answer\": a fluent prose summary of the results, "
+    "written for a human reader\n"
     "- \"confidence\": overall confidence score between 0 and 1"
 )
 
@@ -52,6 +63,10 @@ class QueryEngine:
         self._sources = sources
         self._model = model
         self._default_context_budget = default_context_budget
+
+    @property
+    def sources(self) -> dict[str, DataSource]:
+        return self._sources
 
     def execute(self, request: QueryRequest) -> QueryResponse:
         context_budget = request.context_budget or self._default_context_budget
@@ -92,7 +107,7 @@ class QueryEngine:
 
         if request.response_format != "raw" and all_results:
             synthesis, synthesis_model = self._synthesize(
-                request.query, all_results, context_budget
+                request.query, all_results, context_budget, request.response_format
             )
             answer = synthesis.get("answer")
 
@@ -159,6 +174,7 @@ class QueryEngine:
         original_query: str,
         results: list[SourceResult],
         context_budget: int,
+        response_format: str = "structured",
     ) -> tuple[dict[str, Any], str]:
         results_text = json.dumps(
             [{"source": r.source, "data": r.data[:10]} for r in results],
@@ -170,9 +186,15 @@ class QueryEngine:
         if len(results_text) > max_chars:
             results_text = results_text[:max_chars] + "\n... (truncated)"
 
+        system_prompt = (
+            SYNTHESIS_SYSTEM_PROMPT_NARRATIVE
+            if response_format == "narrative"
+            else SYNTHESIS_SYSTEM_PROMPT_STRUCTURED
+        )
+
         response = self._llm.complete(
             messages=[
-                {"role": "system", "content": SYNTHESIS_SYSTEM_PROMPT},
+                {"role": "system", "content": system_prompt},
                 {
                     "role": "user",
                     "content": f"Original query: {original_query}\n\nResults:\n{results_text}",
