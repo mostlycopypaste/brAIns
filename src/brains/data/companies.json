@@ -1,0 +1,17 @@
+[
+    {"name": "OpenAI", "sector": "AI", "founded": 2015, "headquarters": "San Francisco, CA", "employees": 3000, "description": "AI research company known for GPT models and ChatGPT"},
+    {"name": "Anthropic", "sector": "AI", "founded": 2021, "headquarters": "San Francisco, CA", "employees": 1500, "description": "AI safety company, creator of Claude"},
+    {"name": "Google DeepMind", "sector": "AI", "founded": 2010, "headquarters": "London, UK", "employees": 2500, "description": "AI research lab known for AlphaGo and Gemini"},
+    {"name": "Meta AI", "sector": "AI", "founded": 2013, "headquarters": "Menlo Park, CA", "employees": 1000, "description": "AI research division of Meta, known for LLaMA models"},
+    {"name": "Hugging Face", "sector": "AI", "founded": 2016, "headquarters": "New York, NY", "employees": 400, "description": "Open-source AI platform and model hub"},
+    {"name": "Databricks", "sector": "Data", "founded": 2013, "headquarters": "San Francisco, CA", "employees": 7000, "description": "Unified data analytics platform, creators of Apache Spark"},
+    {"name": "Snowflake", "sector": "Data", "founded": 2012, "headquarters": "Bozeman, MT", "employees": 6800, "description": "Cloud data warehouse platform"},
+    {"name": "Scale AI", "sector": "AI", "founded": 2016, "headquarters": "San Francisco, CA", "employees": 600, "description": "Data labeling and AI infrastructure company"},
+    {"name": "Cohere", "sector": "AI", "founded": 2019, "headquarters": "Toronto, Canada", "employees": 450, "description": "Enterprise NLP and large language model provider"},
+    {"name": "Mistral AI", "sector": "AI", "founded": 2023, "headquarters": "Paris, France", "employees": 100, "description": "Open-weight large language model company"},
+    {"name": "Elastic", "sector": "Search", "founded": 2012, "headquarters": "Mountain View, CA", "employees": 3200, "description": "Search and observability platform based on Elasticsearch"},
+    {"name": "Neo4j", "sector": "Database", "founded": 2007, "headquarters": "San Mateo, CA", "employees": 900, "description": "Graph database platform"},
+    {"name": "Pinecone", "sector": "AI", "founded": 2019, "headquarters": "New York, NY", "employees": 200, "description": "Vector database for AI applications"},
+    {"name": "Weaviate", "sector": "AI", "founded": 2019, "headquarters": "Amsterdam, Netherlands", "employees": 150, "description": "Open-source vector database"},
+    {"name": "Stability AI", "sector": "AI", "founded": 2019, "headquarters": "London, UK", "employees": 200, "description": "Open-source generative AI company, known for Stable Diffusion"}
+]
