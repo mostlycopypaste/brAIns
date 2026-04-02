@@ -27,7 +27,11 @@ _settings: Settings | None = None
 
 
 def _init_engine(settings: Settings) -> QueryEngine:
-    llm = create_provider(settings.llm_provider, api_key=settings.openai_api_key)
+    llm = create_provider(
+        settings.llm_provider,
+        api_key=settings.openai_api_key,
+        ollama_base_url=settings.ollama_base_url,
+    )
 
     sources = {
         "sql": SQLiteSource(),

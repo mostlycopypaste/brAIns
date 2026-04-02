@@ -7,6 +7,7 @@ services:
       - BRAINS_LLM_PROVIDER=${BRAINS_LLM_PROVIDER:-fake}
       - BRAINS_LLM_MODEL=${BRAINS_LLM_MODEL:-gpt-4o-mini}
       - BRAINS_OPENAI_API_KEY=${BRAINS_OPENAI_API_KEY:-}
+      - BRAINS_OLLAMA_BASE_URL=${BRAINS_OLLAMA_BASE_URL:-http://host.docker.internal:11434/v1}
       - BRAINS_DEFAULT_CONTEXT_BUDGET=${BRAINS_DEFAULT_CONTEXT_BUDGET:-4000}
     healthcheck:
       test: ["CMD", "python", "-c", "import httpx; r = httpx.get('http://localhost:8000/health'); assert r.status_code == 200"]

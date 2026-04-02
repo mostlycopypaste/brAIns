@@ -145,11 +145,21 @@ class QueryEngine:
             response_format="json",
         )
 
+        # Strip markdown code fences if present (some LLMs wrap JSON in ```json ... ```)
+        content = response.content.strip()
+        if content.startswith("```"):
+            lines = content.split("\n")
+            content = "\n".join(lines[1:-1]) if len(lines) > 2 else content
+
         try:
-            plan = json.loads(response.content)
+            plan = json.loads(content)
             return plan.get("queries", []), response.model
-        except (json.JSONDecodeError, AttributeError):
-            logger.error("Failed to parse query plan from LLM response")
+        except (json.JSONDecodeError, AttributeError) as e:
+            logger.error(
+                "Failed to parse query plan from LLM response. Error: %s, Response: %s",
+                e,
+                response.content[:500],
+            )
             fallback = [
                 {"source": "sql", "query": request.query, "reasoning": "fallback"}
             ]
@@ -205,8 +215,14 @@ class QueryEngine:
             response_format="json",
         )
 
+        # Strip markdown code fences if present
+        content = response.content.strip()
+        if content.startswith("```"):
+            lines = content.split("\n")
+            content = "\n".join(lines[1:-1]) if len(lines) > 2 else content
+
         try:
-            return json.loads(response.content), response.model
+            return json.loads(content), response.model
         except (json.JSONDecodeError, AttributeError):
             return {"answer": response.content, "confidence": 0.5}, response.model
 

@@ -10,7 +10,12 @@ docker compose up -d
 
 # With OpenAI
 BRAINS_OPENAI_API_KEY=sk-... BRAINS_LLM_PROVIDER=openai docker compose up -d
+
+# With Ollama (local LLM - requires Ollama running on host)
+BRAINS_LLM_PROVIDER=ollama BRAINS_LLM_MODEL=llama3.2 docker compose up -d
 ```
+
+**Note**: When using Ollama with Docker, the container accesses your host's Ollama via `host.docker.internal:11434`. Make sure Ollama is running on your host machine before starting the container.
 
 ## API
 
@@ -108,9 +113,10 @@ pytest
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `BRAINS_LLM_PROVIDER` | `openai` | LLM provider (`openai`, `fake`) |
+| `BRAINS_LLM_PROVIDER` | `openai` | LLM provider (`openai`, `ollama`, `fake`) |
 | `BRAINS_LLM_MODEL` | `gpt-4o-mini` | LLM model name |
-| `BRAINS_OPENAI_API_KEY` | | OpenAI API key |
+| `BRAINS_OPENAI_API_KEY` | | OpenAI API key (required for `openai` provider) |
+| `BRAINS_OLLAMA_BASE_URL` | `http://localhost:11434/v1` | Ollama endpoint (for `ollama` provider) |
 | `BRAINS_DEFAULT_CONTEXT_BUDGET` | `4000` | Max tokens in response |
 
 ## Data sources

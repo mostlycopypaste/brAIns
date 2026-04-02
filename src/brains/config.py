@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     llm_provider: str = "openai"
     llm_model: str = "gpt-4o-mini"
     openai_api_key: str = ""
+    ollama_base_url: str = "http://localhost:11434/v1"
 
     # Query defaults
     default_context_budget: int = 4000
