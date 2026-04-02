@@ -24,6 +24,19 @@ INTERPRETATION_SYSTEM_PROMPT = (
     "(SQL for sql source, natural text for vector source, "
     "JSON operation for graph source)\n"
     "- \"reasoning\": why this source and query are appropriate\n\n"
+    "Examples:\n\n"
+    'Query: "What companies are in the AI sector?"\n'
+    "Plan: {{\"queries\": [{{\"source\": \"sql\", "
+    "\"query\": \"SELECT * FROM companies WHERE sector = 'AI'\", "
+    '"reasoning": "Company data in SQL"}}]}}\n\n'
+    'Query: "Explain how attention works in transformers"\n'
+    "Plan: {{\"queries\": [{{\"source\": \"vector\", "
+    '"query": "attention mechanism transformers", '
+    '"reasoning": "Conceptual explanation"}}]}}\n\n'
+    'Query: "What technologies does OpenAI use?"\n'
+    "Plan: {{\"queries\": [{{\"source\": \"graph\", "
+    '"query": {{"operation": "neighbors", "node": "OpenAI"}}, '
+    '"reasoning": "Technology relationships"}}]}}\n\n'
     "Route queries to the most relevant sources. "
     "Use multiple sources when the question benefits "
     "from cross-referencing."
@@ -35,9 +48,10 @@ SYNTHESIS_SYSTEM_PROMPT_STRUCTURED = (
     "Synthesize the following query results into a structured response. "
     "Include source attribution.\n\n"
     "Return a JSON object with:\n"
-    "- \"answer\": a JSON-formatted string organizing the synthesized data "
-    "with clear keys and structure (the value must be a string, not a nested object)\n"
-    "- \"confidence\": overall confidence score between 0 and 1"
+    "- \"answer\": a string containing synthesized data in any format "
+    "(plain text, markdown, or JSON-formatted string)\n"
+    "- \"confidence\": overall confidence score between 0 and 1\n\n"
+    "IMPORTANT: The 'answer' value must be a STRING type, not a nested object or array."
 )
 
 SYNTHESIS_SYSTEM_PROMPT_NARRATIVE = (
@@ -89,8 +103,10 @@ class QueryEngine:
 
             source = self._sources[source_name]
             query_params = self._build_query_params(source_name, planned_query["query"])
+            logger.debug("source_query: source=%s, query=%s", source_name, query_params)
             raw_results = source.query(query_params)
 
+            logger.debug("source_result: source=%s, count=%d", source_name, len(raw_results))
             if raw_results:
                 sources_consulted.append(source_name)
                 source_result = SourceResult(
@@ -124,6 +140,11 @@ class QueryEngine:
         )
 
     def _interpret(self, request: QueryRequest) -> tuple[list[dict[str, Any]], str]:
+        logger.debug(
+            "interpretation_request: query=%s, sources=%s",
+            request.query, list(self._sources.keys()),
+        )
+
         source_descriptions = "\n".join(
             f"- {name}: {source.describe().description}"
             for name, source in self._sources.items()
@@ -153,6 +174,7 @@ class QueryEngine:
 
         try:
             plan = json.loads(content)
+            logger.debug("interpretation_response: plan=%s", plan)
             return plan.get("queries", []), response.model
         except (json.JSONDecodeError, AttributeError) as e:
             logger.error(
@@ -222,7 +244,11 @@ class QueryEngine:
             content = "\n".join(lines[1:-1]) if len(lines) > 2 else content
 
         try:
-            return json.loads(content), response.model
+            synthesis = json.loads(content)
+            # Some LLMs return answer as dict instead of JSON string - convert to string
+            if isinstance(synthesis.get("answer"), dict):
+                synthesis["answer"] = json.dumps(synthesis["answer"], indent=2)
+            return synthesis, response.model
         except (json.JSONDecodeError, AttributeError):
             return {"answer": response.content, "confidence": 0.5}, response.model
 

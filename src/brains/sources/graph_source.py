@@ -38,6 +38,12 @@ class GraphSource:
                 relation=edge.get("relation", "related_to"),
             )
 
+        self._node_lookup = {n.lower(): n for n in self._graph.nodes()}
+
+    def _resolve_node(self, name: str) -> str:
+        """Case-insensitive node lookup with exact match fallback."""
+        return self._node_lookup.get(name.strip().lower(), name)
+
     def query(self, params: dict[str, Any]) -> list[DataResult]:
         operation = params.get("operation", "neighbors")
 
@@ -50,7 +56,7 @@ class GraphSource:
         return []
 
     def _query_neighbors(self, params: dict[str, Any]) -> list[DataResult]:
-        node = params.get("node", "")
+        node = self._resolve_node(params.get("node", ""))
         if node not in self._graph:
             return []
 
@@ -84,8 +90,8 @@ class GraphSource:
         return results
 
     def _query_path(self, params: dict[str, Any]) -> list[DataResult]:
-        source_node = params.get("from", "")
-        target_node = params.get("to", "")
+        source_node = self._resolve_node(params.get("from", ""))
+        target_node = self._resolve_node(params.get("to", ""))
 
         if source_node not in self._graph or target_node not in self._graph:
             return []
@@ -109,7 +115,7 @@ class GraphSource:
         ]
 
     def _query_subgraph(self, params: dict[str, Any]) -> list[DataResult]:
-        node = params.get("node", "")
+        node = self._resolve_node(params.get("node", ""))
         depth = params.get("depth", 1)
 
         if node not in self._graph:
@@ -141,14 +147,17 @@ class GraphSource:
         ]
 
     def describe(self) -> DataSourceSchema:
+        nodes = sorted(self._graph.nodes())
         return DataSourceSchema(
             name="graph",
             description=(
-                f"Knowledge graph of technology relationships with "
+                f"Technology relationship graph with "
                 f"{self._graph.number_of_nodes()} nodes and "
                 f"{self._graph.number_of_edges()} edges. "
-                f"Supports neighbor lookup, path finding, "
-                f"and subgraph extraction."
+                f"Nodes: {', '.join(nodes)}. "
+                f"Relations: implemented_in, based_on, created, uses, stored_in, applied_to. "
+                f"Operations: neighbors (connected nodes), path (shortest path), subgraph (BFS). "
+                f'Example: {{"operation": "neighbors", "node": "PyTorch"}}'
             ),
             capabilities=["Neighbor lookup", "Shortest path", "Subgraph extraction"],
             sample_queries=[

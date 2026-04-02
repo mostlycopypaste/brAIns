@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 from contextlib import asynccontextmanager
+from datetime import datetime
 
 from fastapi import FastAPI
 
@@ -24,6 +25,7 @@ logger = logging.getLogger(__name__)
 
 _engine: QueryEngine | None = None
 _settings: Settings | None = None
+_recent_queries: list[dict] = []
 
 
 def _init_engine(settings: Settings) -> QueryEngine:
@@ -112,7 +114,24 @@ def create_app() -> FastAPI:
                     interpretation_model="unknown",
                 ),
             )
-        return _engine.execute(request)
+        response = _engine.execute(request)
+        _recent_queries.append({
+            "timestamp": datetime.now().isoformat(),
+            "query": request.query,
+            "sources_consulted": response.sources_consulted,
+            "results": [
+                {"source": r.source, "count": len(r.data)}
+                for r in response.results
+            ],
+            "answer": response.answer,
+        })
+        del _recent_queries[:-5]
+        return response
+
+    @app.get("/debug/last-query")
+    async def debug_last_query():
+        """Return trace of most recent queries (ring buffer of 5)."""
+        return {"recent_queries": _recent_queries}
 
     return app
 

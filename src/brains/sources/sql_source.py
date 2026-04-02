@@ -75,9 +75,12 @@ class SQLiteSource:
         return DataSourceSchema(
             name="sql",
             description=(
-                "SQLite relational database with tech companies data. "
-                "Table: companies (name, sector, founded, headquarters, "
-                "employees, description)."
+                "SQLite database of 15 tech companies. "
+                "Columns: name, sector, founded (year), headquarters, "
+                "employees (count), description. "
+                "Sectors: AI, Data, Search, Database. "
+                "Sample: SELECT name FROM companies "
+                "WHERE sector = 'AI' AND founded > 2015"
             ),
             capabilities=["SQL SELECT queries", "Filtering", "Aggregation", "Sorting"],
             sample_queries=[

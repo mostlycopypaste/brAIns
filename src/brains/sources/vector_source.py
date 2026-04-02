@@ -85,9 +85,10 @@ class VectorSource:
         return DataSourceSchema(
             name="vector",
             description=(
-                "In-memory vector store with AI/ML knowledge chunks. "
-                "Supports semantic similarity search over "
-                "pre-embedded text passages."
+                "Semantic search over AI/ML knowledge articles (15 topics). "
+                "Topics: transformers, attention, GANs, reinforcement learning, "
+                "fine-tuning, embeddings, RAG, CNNs, gradient descent, LLMs, vector databases. "
+                'Use for: conceptual questions, explanations, "what is X", "how does X work"'
             ),
             capabilities=[
                 "Semantic similarity search",
