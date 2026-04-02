@@ -66,9 +66,15 @@ docker compose logs -f           # Follow logs
 Sources and LLM are initialized once at startup (`lifespan` context manager in `main.py`), not per-request. Global `_engine` and `_settings` hold the initialized state.
 
 ### Response Formats
-- `raw`: No LLM synthesis, just return data results
+- `raw`: No LLM synthesis, just return data results (fastest, deterministic)
 - `structured`: LLM returns JSON-formatted answer
 - `narrative`: LLM returns prose summary
+
+### LLM Response Handling
+The query engine includes compatibility fixes for various LLM behaviors:
+- **Markdown code fences**: Strips ` ```json ... ``` ` wrappers that some models add
+- **Type coercion**: Converts dict `answer` to JSON string if model ignores structured output instructions
+- **Temperature 0**: All LLM calls use temperature=0 for deterministic responses
 
 ## Extending
 
@@ -86,3 +92,15 @@ Sources and LLM are initialized once at startup (`lifespan` context manager in `
 - Integration tests (`test_api.py`) use FastAPI TestClient
 - Unit tests mock individual components
 - `conftest.py` provides shared fixtures (fake LLM, test client, sample data)
+- Consistency tests (`test_consistency.py`) verify deterministic behavior at temperature=0
+
+## Using brAIns as a Test Service
+
+brAIns can be used to test AI agents that need to query structured data. Example agent prompt:
+
+> You have access to a data service at http://localhost:8000. Use POST /query with JSON `{"query": "your question"}` to look up information. Available data: 15 tech companies (sector, founding year, location), AI/ML knowledge chunks (transformers, GANs, RL), and technology relationships. GET /sources to see capabilities.
+
+Recommended Ollama models for local testing:
+- `llama3.2`: Fast, good JSON compliance
+- `mistral`: Fast, reliable structured output
+- `qwen2.5`: Larger models handle complex queries better

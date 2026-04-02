@@ -87,8 +87,11 @@ class VectorSource:
             description=(
                 "Semantic search over AI/ML knowledge articles (15 topics). "
                 "Topics: transformers, attention, GANs, reinforcement learning, "
-                "fine-tuning, embeddings, RAG, CNNs, gradient descent, LLMs, vector databases. "
-                'Use for: conceptual questions, explanations, "what is X", "how does X work"'
+                "fine-tuning, embeddings, RAG, CNNs, gradient descent, LLMs, vector databases, "
+                "training techniques. "
+                'Use for: conceptual questions, explanations, "what is X", '
+                '"how does X work", "explain X". '
+                "Any query asking to explain, define, or describe an AI/ML concept belongs here."
             ),
             capabilities=[
                 "Semantic similarity search",

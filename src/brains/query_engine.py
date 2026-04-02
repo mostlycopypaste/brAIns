@@ -32,7 +32,15 @@ INTERPRETATION_SYSTEM_PROMPT = (
     'Query: "Explain how attention works in transformers"\n'
     "Plan: {{\"queries\": [{{\"source\": \"vector\", "
     '"query": "attention mechanism transformers", '
-    '"reasoning": "Conceptual explanation"}}]}}\n\n'
+    '"reasoning": "Conceptual explanation from knowledge base"}}]}}\n\n'
+    'Query: "Explain fine-tuning in machine learning"\n'
+    "Plan: {{\"queries\": [{{\"source\": \"vector\", "
+    '"query": "fine-tuning machine learning", '
+    '"reasoning": "Conceptual explanation from knowledge base"}}]}}\n\n'
+    'Query: "What is vector search?"\n'
+    "Plan: {{\"queries\": [{{\"source\": \"vector\", "
+    '"query": "vector search", '
+    '"reasoning": "Conceptual question about AI/ML topic"}}]}}\n\n'
     'Query: "What technologies does OpenAI use?"\n'
     "Plan: {{\"queries\": [{{\"source\": \"graph\", "
     '"query": {{"operation": "neighbors", "node": "OpenAI"}}, '
